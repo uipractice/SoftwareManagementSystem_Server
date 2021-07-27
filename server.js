@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 require("dotenv").config();
 
 const log = console.log;
-const clientInfoRouter = require("./routes/clientInfo");
+const softwareInfoRouter = require("./routes/softwareInfo");
 
 const app = express();
 app.use(cors());
@@ -19,6 +19,6 @@ mongoose.connect(uri, {
   useCreateIndex: true,
   useUnifiedTopology: true,
 });
-mongoose.connection.once("open", () => log("MongoDB Connection is successful"));
+mongoose.connection.once("open", () => log("MongoDB Connection established successfully"));
 
-app.use("/clientInfo", clientInfoRouter);
+app.use("/softwareInfo", softwareInfoRouter);

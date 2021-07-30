@@ -4,14 +4,14 @@ const softwareInfoSchema = new Schema(
     {
         softwareName: { type: String },
         teamName: { type: String },
-        type: { type: String },
+        selectType: { type: String },
         owner: { type: String },
         pricingInDollar: { type: String },
         pricingInRupee: { type: String },
         totalAmount: { type: String },
         timeline: { type: String },
-        billingCycle: { type: String}
-        //nextBilling: { type: Date},
+        billingCycle: { type: String},
+        nextBilling: { type: Date}
         // deleteReason: { type: String },
         // restoreReason: { type: String },
         // reshareReason: { type: String },

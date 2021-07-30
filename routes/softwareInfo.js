@@ -6,14 +6,14 @@ const log = console.log;
 router.route("/addNewSoftware").post((req, res) => {
   const softwareName = req.body.softwareName;
   const teamName = req.body.teamName;
-  const type = req.body.type;
+  const selectType = req.body.selectType;
   const owner = req.body.owner;
   const pricingInDollar = req.body.pricingInDollar;
   const pricingInRupee =  req.body.pricingInRupee;
   const totalAmount =  req.body.totalAmount;
   const timeline = req.body.timeline;
   const billingCycle = req.body.billingCycle;
-  // const nextBilling = Date.parse( req.body.nextBilling);
+  const nextBilling = Date.parse( req.body.nextBilling);
 
   // const deleteReason = "";
   // const restoreReason = "";
@@ -22,14 +22,14 @@ router.route("/addNewSoftware").post((req, res) => {
   const newSoftwareInfo = new SoftwareInfo({
     softwareName,
     teamName,
-    type,
+    selectType,
     owner,
     pricingInDollar,
     pricingInRupee,
     totalAmount,
     timeline,
-    billingCycle
-    // nextBilling,
+    billingCycle,
+    nextBilling
     // deleteReason,
     // restoreReason,
     // reshareReason,

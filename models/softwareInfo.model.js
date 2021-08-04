@@ -17,7 +17,7 @@ const softwareInfoSchema = new Schema(
             createdAt: { type: Date },
             timeline: { type: String },
         }],
-        isDelete: Boolean,
+        status: { type: string },
         deleteReason: { type: String },
         // restoreReason: { type: String },
         // reshareReason: { type: String },

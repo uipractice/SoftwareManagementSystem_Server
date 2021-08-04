@@ -30,6 +30,8 @@ router.route("/create").post((req, res) => {
     billingCycle,
     nextBilling,
     deleteReason,
+    status
+    // deleteReason,
     // restoreReason,
     // reshareReason,
 

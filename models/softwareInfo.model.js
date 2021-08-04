@@ -11,7 +11,8 @@ const softwareInfoSchema = new Schema(
         totalAmount: { type: String },
         timeline: { type: String },
         billingCycle: { type: String},
-        nextBilling: { type: Date}
+        nextBilling: { type: Date},
+        status: { type: String }
         // deleteReason: { type: String },
         // restoreReason: { type: String },
         // reshareReason: { type: String },

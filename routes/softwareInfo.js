@@ -14,7 +14,6 @@ router.route("/addNewSoftware").post((req, res) => {
   const timeline = req.body.timeline;
   const billingCycle = req.body.billingCycle;
   const nextBilling = Date.parse( req.body.nextBilling);
-
   // const deleteReason = "";
   // const restoreReason = "";
   // const reshareReason = "";
@@ -29,7 +28,8 @@ router.route("/addNewSoftware").post((req, res) => {
     totalAmount,
     timeline,
     billingCycle,
-    nextBilling
+    nextBilling,
+    status
     // deleteReason,
     // restoreReason,
     // reshareReason,

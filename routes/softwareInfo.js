@@ -1,5 +1,6 @@
 const router = require('express').Router();
 let SoftwareInfo = require('../models/softwareInfo.model');
+const { feedbackMail } = require('../mails/feedbackMail');
 const log = console.log;
 
 router.route('/create').post((req, res) => {
@@ -51,6 +52,15 @@ router.route('/:id').delete((req, res) => {
   SoftwareInfo.findByIdAndDelete(req.params.id)
     .then(() => res.json('success'))
     .catch((err) => res.status(400).json('Error: ' + err));
+});
+
+router.route('/feedbackMail').post((req, res) => {
+  SoftwareInfo.findById(req.params.id)
+  .then((softwareInfo) => {
+      feedbackMail(softwareInfo);
+      log('Sharing feedback mail !');
+    })
+    .catch((err) => res.status(400).json('Error dp: ' + err));
 });
 
 module.exports = router;

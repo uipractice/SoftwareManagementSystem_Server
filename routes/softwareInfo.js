@@ -153,9 +153,10 @@ router.route('/download/:id/:billingId').get((req, res) => {
       res.send(e);
     }
   });
+});
 router.route('/feedbackMail').post((req, res) => {
   SoftwareInfo.findById(req.params.id)
-  .then((softwareInfo) => {
+    .then((softwareInfo) => {
       feedbackMail(softwareInfo);
       log('Sharing feedback mail !');
     })

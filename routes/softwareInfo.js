@@ -4,6 +4,7 @@ const express = require('express'),
 let SoftwareInfo = require('../models/softwareInfo.model');
 const multer = require('multer');
 const AWS = require('aws-sdk');
+const { feedbackMail } = require('../mails/feedbackMail');
 const log = console.log;
 
 AWS.config.update({ region: 'ap-south-1' });
@@ -152,6 +153,13 @@ router.route('/download/:id/:billingId').get((req, res) => {
       res.send(e);
     }
   });
+router.route('/feedbackMail').post((req, res) => {
+  SoftwareInfo.findById(req.params.id)
+  .then((softwareInfo) => {
+      feedbackMail(softwareInfo);
+      log('Sharing feedback mail !');
+    })
+    .catch((err) => res.status(400).json('Error dp: ' + err));
 });
 
 module.exports = router;

@@ -1,12 +1,12 @@
-const express = require("express");
-const cors = require("cors");
-const mongoose = require("mongoose");
-require("dotenv").config();
+const express = require('express'),
+  app = express();
+const cors = require('cors');
+const mongoose = require('mongoose');
+require('dotenv').config();
 
 const log = console.log;
-const softwareInfoRouter = require("./routes/softwareInfo");
+const softwareInfoRouter = require('./routes/softwareInfo');
 
-const app = express();
 app.use(cors());
 app.use(express.json());
 
@@ -19,6 +19,8 @@ mongoose.connect(uri, {
   useCreateIndex: true,
   useUnifiedTopology: true,
 });
-mongoose.connection.once("open", () => log("MongoDB Connection established successfully"));
+mongoose.connection.once('open', () =>
+  log('MongoDB Connection established successfully')
+);
 
-app.use("/softwareInfo", softwareInfoRouter);
+app.use('/softwareInfo', softwareInfoRouter);

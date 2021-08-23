@@ -10,8 +10,13 @@ const softwareInfoRouter = require('./routes/softwareInfo');
 app.use(cors());
 app.use(express.json());
 
+app.post('/health', (req, res) => {
+  res.send('Succss');
+});
+
 const port = process.env.PORT || 5000;
 app.listen(port, () => log(`Server running on port: ${port}`));
+
 
 const uri = process.env.ATLAS_URI;
 mongoose.connect(uri, {

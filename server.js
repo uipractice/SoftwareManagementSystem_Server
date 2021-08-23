@@ -10,7 +10,7 @@ const softwareInfoRouter = require('./routes/softwareInfo');
 app.use(cors());
 app.use(express.json());
 
-app.post('/health', (req, res) => {
+app.get('/health', (req, res) => {
   res.send('Succss');
 });
 

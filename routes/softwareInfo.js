@@ -46,8 +46,8 @@ router.route('/:id').get((req, res) => {
     .catch((err) => res.status(400).json('Error: ' + err));
 });
 
-// Get record by id and update it
-router.route('/update/:id').post((req, res) => {
+// Get record by id and renew it
+router.route('/renew/:id').post((req, res) => {
   const payload = req.body;
   SoftwareInfo.findByIdAndUpdate(
     req.params.id,
@@ -57,6 +57,17 @@ router.route('/update/:id').post((req, res) => {
       new: true,
     }
   )
+    .then((row) => res.send(row))
+    .catch((err) => res.status(400).json('Error: ' + err));
+});
+
+// Get record by id and update it
+router.route('/update/:id').post((req, res) => {
+  const payload = req.body;
+  SoftwareInfo.findByIdAndUpdate(req.params.id, payload, {
+    upsert: true,
+    new: true,
+  })
     .then((row) => res.send(row))
     .catch((err) => res.status(400).json('Error: ' + err));
 });

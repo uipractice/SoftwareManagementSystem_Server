@@ -55,12 +55,12 @@ router.route('/:id').delete((req, res) => {
 });
 
 router.route('/feedbackMail').post((req, res) => {
-  SoftwareInfo.findById(req.params.id)
-  .then((softwareInfo) => {
-      feedbackMail(softwareInfo);
+    try {
+      feedbackMail(req.body.feedbackText);
       log('Sharing feedback mail !');
-    })
-    .catch((err) => res.status(400).json('Error dp: ' + err));
+    } catch (err) {
+      res.status(400).json('Error dp: ' + err);
+    }
 });
 
 module.exports = router;

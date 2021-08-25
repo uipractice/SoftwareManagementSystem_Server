@@ -5,14 +5,11 @@ const feedbackMail = (feedbackBody) => {
   //Step 1:
   let transporter = nodemailer.createTransport({
     host: process.env.SMTP_HOST,
-    service: 'gmail',
     port: process.env.SMTP_PORT,
     secure: process.env.SMTP_SECURE,
     auth: {
-      // user: process.env.SMTP_USER,
-      user: 'deepakumar.dx@gmail.com',
-      // pass: process.env.SMTP_PASS,
-      pass: 'GoogleBaba@2',
+      user: process.env.SMTP_USER,
+      pass: process.env.SMTP_PASS,
     },
     tls: {
       rejectUnauthorized: false,
@@ -22,10 +19,9 @@ const feedbackMail = (feedbackBody) => {
   // Step 2
   let mailOptions = {
     to: 'evoke_ui@evoketechnologies.com',
-    // from: '"Evoke Sales Team" <evokepoc@evoketechnologies.com>',
-    from: 'deepakumar.dx@gmail.com',
-    // cc: "thedipakkumaryadav@gmail.com",
-    // bcc: "deepakumar.dx@gmail.com",
+    from: '"Evoke IT Team" <evokepoc@evoketechnologies.com>', //Evoke IT email
+    // cc: "CC email goes here",
+    // bcc: "BCC email goes here",
     subject: `"Feeback of PIS Applicaion."`,
     html: `<!DOCTYPE html>
     <html lang="en-IN">

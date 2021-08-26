@@ -30,8 +30,8 @@ router.route('/create').post((req, res) => {
 // Get all software info data
 router.route('/').get((req, res) => {
   SoftwareInfo.find()
-    .where('status')
-    .ne('deleted') // finds records which are not deleted
+    // .where('status')
+    // .ne('deleted') // finds records which are not deleted
     .sort({
       createdAt: -1,
     })

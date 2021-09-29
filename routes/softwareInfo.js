@@ -51,7 +51,9 @@ router.route('/renew/:id').post((req, res) => {
   const payload = req.body;
   SoftwareInfo.findByIdAndUpdate(
     req.params.id,
-    { $push: { billingDetails: payload } },
+  
+    { $set:{nextBilling:payload.nextBilling}, $push: { billingDetails: payload } },
+ 
     {
       upsert: true,
       new: true,

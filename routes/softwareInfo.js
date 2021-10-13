@@ -122,13 +122,13 @@ router.route('/multiple/:id').post(upload.array('fileName', 10), (req, res) => {
             uploadedFiles;
           item
             .save()
-            .then((data) => {
+            .then((dataResponse) => {
               res.send({
                 status: 'File Upload Successful and saved to DB',
-                data,
+                dataResponse,
               });
             })
-            .catch((err) => res.status(400).json('Error: ' + err));
+            .catch((error) => res.status(400).json('Error: ' + error));
         }
       });
     }
@@ -141,7 +141,7 @@ router.route('/download/:id/:billingId').get((req, res) => {
     log('got item', req.params.billingId);
     try {
       const selectedBilling = item.billingDetails.filter(
-        (item) => item._id == req.params.billingId
+        (items) => items._id == req.params.billingId
       );
       const fileNames = selectedBilling[0].invoiceFiles;
       log('selectedBilling fileNames', fileNames);

@@ -19,7 +19,7 @@ const feedbackMail = (feedbackBody) => {
   // Step 2
   let mailOptions = {
     to: 'evoke_ui@evoketechnologies.com',
-    from: '"Evoke IT Team" <evokepoc@evoketechnologies.com>', //Evoke IT email
+    from: '"Evoke IT Team" <evkappspoc@evoketechnologies.com>', //Evoke IT email
     // cc: "CC email goes here",
     // bcc: "BCC email goes here",
     subject: `"Feeback of PIS Applicaion."`,
@@ -65,7 +65,7 @@ const feedbackMail = (feedbackBody) => {
                     padding-left: 10px;
                   "
                 >
-                  Project Information System
+                  Software Management System
                 </h2>
               </td>
               <td style="padding: 7px 15px 7px 0">

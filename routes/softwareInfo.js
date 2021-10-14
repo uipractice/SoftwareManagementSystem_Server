@@ -167,13 +167,13 @@ router.route('/download/:id/:billingId').get((req, res) => {
     }
   });
 });
-router.route('/feedbackMail').post((req, res) => {
-    try {
-      feedbackMail(req.body.feedbackText);
-      log('Sharing feedback mail !');
-    } catch (err) {
-      res.status(400).json('Error dp: ' + err);
-    }
+router.route('/feebackMail').post((req, res) => {
+  try {
+    feedbackMail(req.body.feedbackText);
+    log('Sharing feedback mail !');
+  } catch (err) {
+    res.status(400).json('Error dp: ' + err);
+  }
 });
 
 module.exports = router;

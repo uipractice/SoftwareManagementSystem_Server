@@ -18,7 +18,7 @@ const feedbackMail = (feedbackBody) => {
 
   // Step 2
   let mailOptions = {
-    to: 'evoke_ui@evoketechnologies.com',
+    to: 'spaleti@evoketechnologies.com',
     from: '"Evoke IT Team" <evkappspoc@evoketechnologies.com>', //Evoke IT email
     // cc: "cc email id goes here",
     // bcc: "cc email id goes here",

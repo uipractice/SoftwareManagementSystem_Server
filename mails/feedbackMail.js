@@ -161,13 +161,13 @@ const feedbackMail = (feedbackBody) => {
   };
 
   // Step 3
-  transporter.sendMail(mailOptions, (err, info) => {
+  transporter.sendMail(mailOptions, function(err, data) {
     if (err) {
       log('Filed to send, to see the detials uncomment below log');
       log('Error occured in sending the mail : ', err);
     } else {
       log('Mail Sent Successfully, to see the detials uncomment below log');
-      log('Mail sent successfully', info);
+      log('Mail sent successfully', data);
     }
   });
 };

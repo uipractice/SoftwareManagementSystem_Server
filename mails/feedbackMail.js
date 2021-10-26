@@ -19,11 +19,11 @@ const feedbackMail = (feedbackBody) => {
   // Step 2
   let mailOptions = {
     to: 'evoke_ui@evoketechnologies.com',
-    from: '"Evoke IT Team" <evokepoc@evoketechnologies.com>', //Evoke IT email
-    // cc: "CC email goes here",
-    // bcc: "BCC email goes here",
+    from: '"Evoke IT Team" <evkappspoc@evoketechnologies.com>', //Evoke IT email
+    // cc: "cc email id goes here",
+    // bcc: "cc email id goes here",
     subject: `"Feeback of PIS Applicaion."`,
-    html: `<!DOCTYPE html>
+    html: ` <!DOCTYPE html>
     <html lang="en-IN">
       <head>
         <meta http-equiv="content-type" content="text/html; charset=utf-8" />
@@ -45,66 +45,95 @@ const feedbackMail = (feedbackBody) => {
             margin: auto;
             background: #f8f8f8;
             padding-bottom: 0;
+            border: 0;
+          "
         >
           <tbody>
-            <tr style="background: #023047">
-              <td style="padding: 7px 0 7px 15px; width: 39%">
-                <img
-                  src="https://d331tpl5vusgqa.cloudfront.net/wp-content/uploads/2021/08/logo-pis.svg"
-                />
-              </td>
-              <td>
-                <h2
-                  style="
-                    font-size: 16px;
-                    font-weight: 900;
-                    line-height: 22px;
-                    font-family: calibri;
-                    color: #f8a066;
-                    border-left: 1px solid #7b7b7b;
-                    padding-left: 10px;
-                  "
-                >
-                  Project Information System
-                </h2>
-              </td>
-              <td style="padding: 7px 15px 7px 0">
-                <img
-                  src="https://d331tpl5vusgqa.cloudfront.net/wp-content/uploads/2021/08/mail-icon.png"
-                  style="float: right"
-                />
-              </td>
-            </tr>
             <tr>
-              <td
-                align="left"
-                style="padding: 30px; background-color: #219ebc"
-                colspan="3"
-              >
-                <div>
-                  <p
-                    style="
-                      font-weight: bold;
-                      font-size: 16px;
-                      line-height: 24px;
-                      color: #ffffff;
-                      font-family: calibri;
-                      margin-top: 0;
-                    "
-                  >
-                    Hello Evoke UI Team
-                  </p>
-                  <p
-                    style="
-                      font-weight: bold;
-                      font-size: 16px;
-                      line-height: 24px;
-                      color: #ffffff;
-                      font-family: calibri;
-                      margin-bottom: 0;
-                    "
-                  >${feedbackBody}</p>
-                </div>
+              <td>
+                <table
+                  cellspacing="0"
+                  cellpadding="0"
+                  border="0"
+                  width="100%"
+                  style="background-color: #023047"
+                >
+                  <tbody>
+                    <tr>
+                      <td width="20px" height="54px"></td>
+                      <td width="150px" height="54px">
+                        <img
+                          src="https://d331tpl5vusgqa.cloudfront.net/wp-content/uploads/2021/09/emails-logo.png"
+                          title="logo"
+                          alt="logo main"
+                        />
+                      </td>
+                      <td width="10px" height="54px"></td>
+                      <td width="250px" height="54px" style="text-align: left">
+                        <h2
+                          style="
+                            font-size: 16px;
+                            font-weight: 900;
+                            line-height: 22px;
+                            font-family: calibri;
+                            color: #f8a066;
+                            border-left: 1px solid #7b7b7b;
+                            padding-left: 10px;
+                          "
+                        >
+                          Project Information System
+                        </h2>
+                      </td>
+                      <td width="150px" height="54px">
+                        <img
+                          src="https://d331tpl5vusgqa.cloudfront.net/wp-content/uploads/2021/08/mail-icon.png"
+                          style="float: right"
+                        />
+                      </td>
+                      <td width="20px" height="54px"></td>
+                    </tr>
+                  </tbody>
+                </table>
+                <table
+                  cellspacing="0"
+                  cellpadding="0"
+                  border="0"
+                  width="100%"
+                  style="background-color: #219ebc"
+                >
+                  <tbody>
+                    <tr>
+                      <td style="padding: 20px">
+                        <div>
+                            <p
+                        style="
+                          font-weight: bold;
+                          font-size: 16px;
+                          line-height: 24px;
+                          color: #ffffff;
+                          font-family: calibri;
+                          margin-top: 0;
+                        "
+                      >
+                        Hello Evoke UI Team
+                      </p>
+                      <p
+                        style="
+                          font-weight: bold;
+                          font-size: 16px;
+                          line-height: 24px;
+                          color: #ffffff;
+                          font-family: calibri;
+                          margin-bottom: 0;
+                        "
+                      >
+                       ${feedbackBody}
+                      </p>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
               </td>
             </tr>
     
@@ -121,7 +150,6 @@ const feedbackMail = (feedbackBody) => {
               >
                 <img
                   src="https://d331tpl5vusgqa.cloudfront.net/wp-content/uploads/2021/08/feedback.png"
-                  style="width: 260px"
                 />
               </td>
             </tr>
@@ -129,18 +157,17 @@ const feedbackMail = (feedbackBody) => {
         </table>
       </body>
     </html>
-    
-          `,
+         `,
   };
 
   // Step 3
-  transporter.sendMail(mailOptions, (err, info) => {
+  transporter.sendMail(mailOptions, function(err, data) {
     if (err) {
       log('Filed to send, to see the detials uncomment below log');
       log('Error occured in sending the mail : ', err);
     } else {
       log('Mail Sent Successfully, to see the detials uncomment below log');
-      log('Mail sent successfully', info);
+      log('Mail sent successfully', data);
     }
   });
 };

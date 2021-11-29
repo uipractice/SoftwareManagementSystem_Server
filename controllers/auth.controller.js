@@ -7,13 +7,13 @@ const config = require("../config/auth.config");
         User.findOne({userName:req.body.userName})
         .then((user)=>{
             if (!user) {
-                res.status(200).send({accessToken: null, message: "Invalid user" });
+                res.status(200).send({accessToken: null, message: "Invalid username or Password" });
                 return;
               }
               if (req.body.password!== user.password) {
                 return res.status(200).send({
                   accessToken: null,
-                  message: "Invalid username or Password!"
+                  message: "Invalid username or Password"
                 });
               }
               var token = jwt.sign({ id: user.id }, config.secret, {

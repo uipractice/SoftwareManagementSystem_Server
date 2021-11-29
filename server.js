@@ -6,8 +6,8 @@ require('dotenv').config();
 
 const log = console.log;
 const softwareInfoRouter = require('./routes/softwareInfo');
-const authenticationRouter=require('./routes/auth.routes')
-
+const authenticationRouter=require('./routes/auth.routes');
+const userManagementRouter=require('./routes/userManagement.routes');
 app.use(cors());
 app.use(express.json());
 
@@ -30,4 +30,5 @@ mongoose.connection.once('open', () =>
 );
 
 app.use('/softwareInfo', softwareInfoRouter);
-app.use('/auth',authenticationRouter)
+app.use('/auth',authenticationRouter);
+app.use('/users',userManagementRouter)

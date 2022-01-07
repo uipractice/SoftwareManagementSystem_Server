@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const billingDetailsSchema = new Schema({
+
+const YearlyBillingSchema= new Schema({
   pricingInDollar: { type: String },
   pricingInRupee: { type: String },
   billingMonth: { type: String },
@@ -10,7 +11,7 @@ const billingDetailsSchema = new Schema({
   timeline: { type: String },
   invoiceFiles: { type: Array },
   description: { type: String },
-});
+})
 
 const softwareInfoSchema = new Schema(
   {
@@ -23,7 +24,7 @@ const softwareInfoSchema = new Schema(
     totalAmount: { type: String },
     billingCycle: { type: String },
     nextBilling: { type: Date },
-    billingDetails: [billingDetailsSchema],
+    billingDetails: {},
     status: { type: String },
     deleteReason: { type: String },
     // restoreReason: { type: String },

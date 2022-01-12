@@ -51,15 +51,16 @@ router.route('/renew/:id').post((req, res) => {
   const payload = req.body;
   SoftwareInfo.findByIdAndUpdate(
     req.params.id,
-  
-    { $set:{nextBilling:payload.nextBilling}, $push: { billingDetails: payload } },
- 
+    payload,
     {
       upsert: true,
       new: true,
     }
   )
-    .then((row) => res.send(row))
+    .then((SoftwareInfo) => { 
+      return res.json(SoftwareInfo)
+    
+    })
     .catch((err) => res.status(400).json('Error: ' + err));
 });
 

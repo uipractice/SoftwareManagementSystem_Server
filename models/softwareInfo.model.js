@@ -3,14 +3,15 @@ const Schema = mongoose.Schema;
 
 
 const YearlyBillingSchema= new Schema({
-  pricingInDollar: { type: String },
+
+    pricingInDollar: { type: String },
   pricingInRupee: { type: String },
   billingMonth: { type: String },
   nextBilling: { type: Date },
   createdAt: { type: Date },
   timeline: { type: String },
   invoiceFiles: { type: Array },
-  description: { type: String },
+  description: { type: String }
 })
 
 const softwareInfoSchema = new Schema(
@@ -24,7 +25,7 @@ const softwareInfoSchema = new Schema(
     totalAmount: { type: String },
     billingCycle: { type: String },
     nextBilling: { type: Date },
-    billingDetails: {},
+    billingDetails: Schema.Types.Mixed,
     status: { type: String },
     deleteReason: { type: String },
     // restoreReason: { type: String },

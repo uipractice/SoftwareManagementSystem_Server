@@ -25,7 +25,7 @@ const softwareInfoSchema = new Schema(
     totalAmount: { type: String },
     billingCycle: { type: String },
     nextBilling: { type: Date },
-    billingDetails: Schema.Types.Mixed,
+    billingDetails: {},
     status: { type: String },
     deleteReason: { type: String },
     // restoreReason: { type: String },

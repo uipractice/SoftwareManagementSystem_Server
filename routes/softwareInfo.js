@@ -128,7 +128,11 @@ router.route('/multiple/:id').post(upload.array('fileName', 10), (req, res) => {
               if(item.billingDetails[year][index]['invoiceFiles']=== undefined){
                 item.billingDetails[year][index]['invoiceFiles']=[]
               }
-              item.billingDetails[year][index]['invoiceFiles']=uploadedFiles
+
+              /** This code will append the newly added files which are updated for a particular month */
+              let newlyUploaded = [...item.billingDetails[year][index]['invoiceFiles'],...uploadedFiles]
+              item.billingDetails[year][index]['invoiceFiles']=newlyUploaded
+              
             }
           }) 
           item.markModified('billingDetails')

@@ -7,26 +7,20 @@ const config = require("../config/auth.config");
         User.findOne({userName:req.body.userName})
         .then((user)=>{
             if (!user) {
-                res.status(200).send({accessToken: null, message: "Invalid Username or password" });
+                res.status(200).send({accessToken: null, message: "Invalid username or Password" });
                 return;
               }
-            var passwordIsValid = bcrypt.compareSync(
-                req.body.password,
-                user.password
-              );
-        
-              if (!passwordIsValid) {
+              if (req.body.password!== user.password) {
                 return res.status(200).send({
                   accessToken: null,
-                  message: "Invalid username or Password!"
+                  message: "Invalid username or Password"
                 });
               }
               var token = jwt.sign({ id: user.id }, config.secret, {
                 expiresIn: 86400 // 24 hours
               });
               res.status(200).send({
-                id: user._id,
-                userName: user.userName,
+                user,
                 accessToken: token
               });
         })

@@ -51,15 +51,16 @@ router.route('/renew/:id').post((req, res) => {
   const payload = req.body;
   SoftwareInfo.findByIdAndUpdate(
     req.params.id,
-  
-    { $set:{nextBilling:payload.nextBilling}, $push: { billingDetails: payload } },
- 
+    payload,
     {
       upsert: true,
       new: true,
     }
   )
-    .then((row) => res.send(row))
+    .then((SoftwareInfo) => { 
+      return res.json(SoftwareInfo)
+    
+    })
     .catch((err) => res.status(400).json('Error: ' + err));
 });
 
@@ -83,8 +84,11 @@ router.route('/:id').delete((req, res) => {
 
 // Upload multiple files to S3 bucket
 router.route('/multiple/:id').post(upload.array('fileName', 10), (req, res) => {
-  console.log('in route post');
+  console.log('in route post',req.body.year);
   const files = req.files || [];
+  const year=req.body.year;
+  const subscriptionMonth=req.body.month
+
   SoftwareInfo.findById(req.params.id).then((item) => {
     const s3 = new AWS.S3({
       accessKeyId: process.env.ACCESS_KEY_ID,
@@ -104,7 +108,7 @@ router.route('/multiple/:id').post(upload.array('fileName', 10), (req, res) => {
       const fileNameArray = file.originalname.split('.');
       // Params for file Upload
       params.Body = file.buffer;
-      params.Key = `${req.params.id}_${fileNameArray[0]}.${fileNameArray[1]}`;
+      params.Key = `${req.params.id}${year}${subscriptionMonth}_${fileNameArray[0]}.${fileNameArray[1]}`;
       params.ContentType = file.mimetype;
       params.ContentDisposition = `attachment; filename=${file.originalname}`;
       // Uploading files to the bucket
@@ -118,8 +122,20 @@ router.route('/multiple/:id').post(upload.array('fileName', 10), (req, res) => {
         if (uploadedFiles.length === files.length) {
           const { billingDetails } = item;
           // Update the Db with the uploaded filenames
-          item.billingDetails[billingDetails.length - 1].invoiceFiles =
-            uploadedFiles;
+          
+          item.billingDetails[year].forEach((month,index)=>{
+            if(subscriptionMonth===month.billingMonth){
+              if(item.billingDetails[year][index]['invoiceFiles']=== undefined){
+                item.billingDetails[year][index]['invoiceFiles']=[]
+              }
+
+              /** This code will append the newly added files which are updated for a particular month */
+              let newlyUploaded = [...item.billingDetails[year][index]['invoiceFiles'],...uploadedFiles]
+              item.billingDetails[year][index]['invoiceFiles']=newlyUploaded
+              
+            }
+          }) 
+          item.markModified('billingDetails')
           item
             .save()
             .then((data) => {
@@ -135,13 +151,15 @@ router.route('/multiple/:id').post(upload.array('fileName', 10), (req, res) => {
   });
 });
 
+
 // Get Signed URL for multiple files
-router.route('/download/:id/:billingId').get((req, res) => {
+router.route('/download/:id/:year/:month').get((req, res) => {
+ 
   SoftwareInfo.findById(req.params.id).then((item) => {
     log('got item', req.params.billingId);
     try {
-      const selectedBilling = item.billingDetails.filter(
-        (item) => item._id == req.params.billingId
+      const selectedBilling = item.billingDetails[req.params.year].filter(
+        (item) => item.billingMonth == req.params.month
       );
       const fileNames = selectedBilling[0].invoiceFiles;
       log('selectedBilling fileNames', fileNames);
